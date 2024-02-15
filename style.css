@@ -1,3 +1,31 @@
 body {
     background-color: lightblue;
+    text-align: center;
+}
+#container {
+    background-color: red;
+    width: 450px;
+    height: 450px;
+    margin: auto;
+}
+#winner {
+    background-color: violet;
+    visibility: hidden;
+	width: 450px;
+	position: absolute;
+}
+#grid {
+    background-color: green;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}
+    
+#grid div {
+    background-color: brown;
+    width: 150px;
+    height: 150px;
+    border: 1px solid orange;
+    box-sizing: border-box;
 }
