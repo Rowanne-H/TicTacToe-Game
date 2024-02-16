@@ -11,7 +11,7 @@ body {
 #winner {
     background-color: violet;
     visibility: hidden;
-	width: 450px;
+	
 	position: absolute;
 }
 #grid {
