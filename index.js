@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerO = "O";
     let playerMove = ['','','','','','','','',''];
     let currentPlayer = playerX;
-    let currentTurn = 0;
+    let gameOn = true;
     let winningCombinations = [
         [0,1,2],
         [3,4,5],
@@ -31,27 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const gridClicked = function(e){
-        let index = e.target.id;
-        ++currentTurn;
-        if(!playerMove[index]){
-            playerMove [index] = currentPlayer;
-            e.target.innerText = currentPlayer;
-            if(winningCheck() == true){
-                //alert(`${currentPlayer} has won`);
-                displayWinnerFx(currentPlayer);
-                addScore(currentPlayer);
-                return;   
-                } else{ //check for a draw if winner not achieved.
-                    if(currentTurn === 9){
-                        displayDraw()
+        if(gameOn === true) {
+            let index = e.target.id;
+            if(!playerMove[index]){
+                playerMove [index] = currentPlayer;
+                e.target.innerText = currentPlayer;
+                if(winningCheck() == true){
+                    //alert(`${currentPlayer} has won`);
+                    displayWinnerFx(currentPlayer);
+                    addScore(currentPlayer);
+                    return;   
+                    } else{ //check for a draw if winner not achieved.
+                        if(playerMove.includes('') === false){
+                            displayDraw()
+                        }
                     }
-                }
-        currentPlayer = currentPlayer === playerX ? playerO : playerX;
-        }
+            currentPlayer = currentPlayer === playerX ? playerO : playerX;
+            }
+        }        
     };
     
     const displayWinnerFx = (player) => {
         let displayWinner = document.querySelector('#winner');
+        gameOn = false;
         displayWinner.style.visibility = 'visible'
         if(player) {
             displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayDraw = () => {
+        gameOn = false;
         let displayWinner = document.querySelector('#winner');
         displayWinner.style.visibility = 'visible'
         displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
