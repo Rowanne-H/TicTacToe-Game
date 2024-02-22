@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const displayWinnerFx = (player) => {
         let displayWinner = document.querySelector('#winner');
+        gameOn = false;
         displayWinner.style.visibility = 'visible'
         if(player) {
             displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayDraw = () => {
+        gameOn = false;
         let displayWinner = document.querySelector('#winner');
         displayWinner.style.visibility = 'visible'
         displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
