@@ -1,11 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     let startBtn = document.querySelector('#start');
     let resetBtn = document.querySelector('#reset');
+    let playAgainBtn = document.querySelector('#playAgain');
+    let grid = document.querySelectorAll('#grid');
     let grids = document.querySelectorAll('#grid>div');
     let scoreDisplay1 = document.querySelector('#player1-score');
     let scoreDisplay2 = document.querySelector('#player2-score');
+
     let Xscore = 0;
     let Oscore = 0;
+
     const playerX = "X";
     const playerO = "O";
     let playerMove = ['','','','','','','','',''];
@@ -38,9 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let index = e.target.id;
         ++currentTurn;
         if(!playerMove[index]){
-            playerMove [index] = currentPlayer;
+            playerMove[index] = currentPlayer;
             e.target.innerText = currentPlayer;
             if(winningCheck() == true){
+
                 //alert(`${currentPlayer} has won`);
                 gameOn = false;
                 displayWinnerFx(currentPlayer);
@@ -56,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+
     const displayWinnerFx = (player) => {
         let displayWinner = document.querySelector('#winner');
         gameOn = false;
@@ -110,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startBtn.addEventListener('click', restartGame)
 
     resetBtn.addEventListener('click', resetGame)
+
     grids.forEach(grid => {
       grid.addEventListener('click', gridClicked) //, {once: true}) <- this prevents grid listening to click after restart 
     })
