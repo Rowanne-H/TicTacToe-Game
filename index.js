@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let playerMove = ['','','','','','','','',''];
     let currentPlayer = playerX;
     let currentTurn = 0;
+    let gameOn = true
     let winningCombinations = [
         [0,1,2],
         [3,4,5],
@@ -31,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const gridClicked = function(e){
+        if(gameOn === false){
+            return
+        }
         let index = e.target.id;
         ++currentTurn;
         if(!playerMove[index]){
@@ -38,11 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.innerText = currentPlayer;
             if(winningCheck() == true){
                 //alert(`${currentPlayer} has won`);
+                gameOn = false;
                 displayWinnerFx(currentPlayer);
                 addScore(currentPlayer);
                 return;   
                 } else{ //check for a draw if winner not achieved.
                     if(currentTurn === 9){
+                        gameOn = false;
                         displayDraw()
                     }
                 }
@@ -80,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     const restartGame = function() {
+        gameOn = true;
         let hideDisplay = document.querySelector('#winner');
         hideDisplay.style.visibility = 'hidden';
         playerMove = ['','','','','','','','',''];
