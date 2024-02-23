@@ -1,16 +1,16 @@
 body {
-    background-color: lightblue;
+    background-color: white;
     text-align: center;
+    font-family: "Comic Sans MS", Times, serif;
 }
 #container {
-    background-color: red;
     width: 450px;
     height: 450px;
     margin: auto;     
 }
 
 #displayResult {
-    background-color: violet;
+    background-color: lightblue; 
 	width: 450px;
     height: 450px;
     position: absolute;  
@@ -18,17 +18,24 @@ body {
 }
 
 #grid {
-    background-color: green;
     width: 450px;
     height: 450px;
     display: flex;
     flex-wrap: wrap;    
+    font-size: 100px;
 }
     
 #grid div {
-    background-color: brown;
+    background-color: white;
     width: 150px;
     height: 150px;
-    border: 1px solid orange;
+    border: 5px solid black ;
     box-sizing: border-box;
+}
+
+#start-reset{
+    margin-top: 30px;   
+}
+#player1, #player2{
+    margin-right: 30px;  
 }
