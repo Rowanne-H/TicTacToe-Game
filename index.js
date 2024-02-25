@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let Xscore = 0;
     let Oscore = 0;
-
     let playerMove = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = "X";
     let gameOn = true
@@ -57,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
     const displayWinnerFx = (player) => {
         gameOn = false;
         displayWinner.style.visibility = 'visible';
@@ -68,10 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    
-    //we keep the score in Xscore and OScore instead of the
-    //scoreDisplay1, scoreDisplay2 html element
-
     const addScore = (player) => {
         if (player === 'X') {
             scoreDisplay1.innerHTML = ++Xscore
@@ -80,11 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
     const restartGame = function () {
         gameOn = true;
-        let hideDisplay = document.querySelector('#winner');
-        hideDisplay.style.visibility = 'hidden';
+        displayWinner.style.visibility = 'hidden';
         playerMove = ['', '', '', '', '', '', '', '', ''];
         grids.forEach(grid => {
             grid.innerText = "";
