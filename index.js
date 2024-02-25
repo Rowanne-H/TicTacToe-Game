@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let playerMove = ['','','','','','','','',''];
     let currentPlayer = "X";
-    let currentTurn = 0;
     let gameOn = true
     let winningCombinations = [
         [0,1,2],
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return
         }
         let index = e.target.id;
-        ++currentTurn;
         if(!playerMove[index]){
             playerMove[index] = currentPlayer;
             e.target.innerText = currentPlayer;
@@ -49,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 addScore(currentPlayer);
                 return;   
                 } else{ //check for a draw if winner not achieved.
-                    if(currentTurn === 9){
+                    if(playerMove.includes('') === false){
                         gameOn = false;
                         displayDraw()
                     }
@@ -95,8 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let hideDisplay = document.querySelector('#winner');
         hideDisplay.style.visibility = 'hidden';
         playerMove = ['','','','','','','','',''];
-        currentTurn = 0;
-        
         grids.forEach(grid => {
             grid.innerText = "";
         });
