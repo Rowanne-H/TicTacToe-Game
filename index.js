@@ -48,8 +48,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const placeO = (i) => {
+        console.log(i)
+    }
+
     const computerTurn = () => {
-        console.log('computer')
+        let count;
+        let iToUse;
+        let checkAgain = true;
+    
+
+        //if there are 2 'X', place O in the index of ''
+        if (checkAgain === true) {
+            for (let i = 0; i < winningCombinations.length; i++) {
+                count = 0;
+                iToUse = -1;
+                for (let j = 0; j < winningCombinations[i].length; j++) {
+                    let index = winningCombinations[i][j];
+                    if (playerMove[index] === 'X') { count++ }//count X
+                    if (playerMove[index] === '') { iToUse = index; }//find index of ''
+                }
+                if (count === 2 && iToUse != -1) {
+                    placeO(iToUse)
+                    checkAgain = false;
+                    break;
+                }
+            }
+        }
+        gameOn = true;
+        switchPlayer(currentPlayer);
+        
+        
     }
 
     const gridClicked = function (e) {
@@ -63,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (playerMove.includes('') === false) { //check for a draw if winner not achieved.
                     displayWinnerFx();
                 } else {
-                    if (computer === 'O') {
+                    if (computer === 'O') {//whether the next player is computer
                         gameOn = false;
                         switchPlayer(currentPlayer);
                         setTimeout(computerTurn, 500);
