@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreDisplay1 = document.querySelector('#player1-score');
     let scoreDisplay2 = document.querySelector('#player2-score');
     let displayWinner = document.querySelector('#winner');
+    let onePlayerBtn = document.querySelector('#one-player');
+    let twoPlayerBtn = document.querySelector('#two-player');
 
     let Xscore = 0;
     let Oscore = 0;
