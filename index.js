@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { //check for a draw if winner not achieved.
                 if (playerMove.includes('') === false) {
                     gameOn = false;
-                    displayDraw();
-                    return
+                    displayWinnerFx();
+                    return;
                 }
             }
             currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -68,13 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const displayDraw = () => {
-        gameOn = false;
-        displayWinner.style.visibility = 'visible'
-        displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
-
-    };
-
+    
     //we keep the score in Xscore and OScore instead of the
     //scoreDisplay1, scoreDisplay2 html element
 
