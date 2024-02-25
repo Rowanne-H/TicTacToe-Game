@@ -48,15 +48,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const placeO = (i) => {
-        console.log(i)
+    const placeO = (i) => {//please update if there is a simpler way to get element by ID using a variable with index stored in it
+        playerMove[i] = 'O';
+        if (i == 0) {
+            document.getElementById('0').innerHTML = 'O';
+        } else if (i == 1) {
+            document.getElementById('1').innerHTML = 'O';
+        } else if (i == 2) {
+            document.getElementById('2').innerHTML = 'O';
+        } else if (i == 3) {
+            document.getElementById('3').innerHTML = 'O';
+        } else if (i == 4) {
+            document.getElementById('4').innerHTML = 'O';
+        } else if (i == 5) {
+            document.getElementById('5').innerHTML = 'O';
+        } else if (i == 6) {
+            document.getElementById('6').innerHTML = 'O';
+        } else if (i == 7) {
+            document.getElementById('7').innerHTML = 'O';
+        } else {
+            document.getElementById('8').innerHTML = 'O';
+        }  
     }
 
     const computerTurn = () => {
         let count;
         let iToUse;
         let checkAgain = true;
-    
+
+        //if there are 2 'O', place O in the index of ''
+        for (let i = 0; i < winningCombinations.length; i++) {
+            count = 0;
+            iToUse = -1;
+            for (let j = 0; j < winningCombinations[i].length; j++) {
+                let index = winningCombinations[i][j];
+                if (playerMove[index] === 'O') { count++ }
+                if (playerMove[index] === '') { iToUse = index }
+                console.log(winningCombinations[i]+ 'count    '+ count+ ' i   '+   index + ' p   '+playerMove[index])
+            }
+            if (count === 2 && iToUse != -1) {
+                placeO(iToUse);
+                displayWinnerFx('O');
+                return;
+            }
+            
+        } 
+        console.log('f')   
 
         //if there are 2 'X', place O in the index of ''
         if (checkAgain === true) {
