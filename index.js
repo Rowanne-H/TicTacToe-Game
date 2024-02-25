@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (player === 'X') {
             currentPlayer = 'O';
             player1.className = '';
-            player2.className = 'current-player'; 
+            player2.className = 'current-player';
         } else {
             currentPlayer = 'X';
             player1.className = 'current-player';
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('7').innerHTML = 'O';
         } else {
             document.getElementById('8').innerHTML = 'O';
-        }  
+        }
     }
 
     const computerTurn = () => {
@@ -84,16 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let index = winningCombinations[i][j];
                 if (playerMove[index] === 'O') { count++ }
                 if (playerMove[index] === '') { iToUse = index }
-                console.log(winningCombinations[i]+ 'count    '+ count+ ' i   '+   index + ' p   '+playerMove[index])
             }
             if (count === 2 && iToUse != -1) {
                 placeO(iToUse);
                 displayWinnerFx('O');
                 return;
             }
-            
-        } 
-        console.log('f')   
+        }
 
         //if there are 2 'X', place O in the index of ''
         if (checkAgain === true) {
@@ -121,6 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 iToUse = playerMove.indexOf('');
             }
             placeO(iToUse);
+        }
+
+        if (playerMove.includes('') === false) {
+            displayWinnerFx();
         }
 
         gameOn = true;
