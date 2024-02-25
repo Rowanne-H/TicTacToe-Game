@@ -36,6 +36,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const addScore = (player) => {
+        if (player === 'X') {
+            scoreDisplay1.innerHTML = ++Xscore
+        } else {
+            scoreDisplay2.innerHTML = ++Oscore
+        }
+    };
+
+    const displayWinnerFx = (player) => {
+        gameOn = false;
+        displayWinner.style.visibility = 'visible';
+        if (player) {
+            displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
+            addScore(currentPlayer)
+        } else {
+            displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
+        }
+    };
+
     const switchPlayer = (player) => {
         if (player === 'X') {
             currentPlayer = 'O';
@@ -75,47 +94,62 @@ document.addEventListener('DOMContentLoaded', () => {
         let count;
         let iToUse;
         let checkAgain = true;
-
-        //if there are 2 'O', place O in the index of ''
-        for (let i = 0; i < winningCombinations.length; i++) {
-            count = 0;
-            iToUse = -1;
-            for (let j = 0; j < winningCombinations[i].length; j++) {
-                let index = winningCombinations[i][j];
-                if (playerMove[index] === 'O') { count++ }
-                if (playerMove[index] === '') { iToUse = index }
+        
+        //computer place O randomly so that player 1 have a chance to win
+        if (playerMove.filter(e => e === '').length < 4) {
+            console.log(playerMove.filter(e => e === '').length)
+            const getRandomI = () =>{
+                let i = Math.floor(Math.random() * 9);
+                if (!playerMove[i]) {
+                    return i
+                } else {
+                    return getRandomI()
+                }
             }
-            if (count === 2 && iToUse != -1) {
+            iToUse = getRandomI();
+            placeO(iToUse)
+        } else {
+            //if there are 2 'O', place O in the index of ''
+            for (let i = 0; i < winningCombinations.length; i++) {
+                count = 0;
+                iToUse = -1;
+                for (let j = 0; j < winningCombinations[i].length; j++) {
+                    let index = winningCombinations[i][j];
+                    if (playerMove[index] === 'O') { count++ }
+                    if (playerMove[index] === '') { iToUse = index }
+                }
+                if (count === 2 && iToUse != -1) {
+                    placeO(iToUse);
+                    displayWinnerFx('O');
+                    return;
+                }
+            }
+
+            //if there are 2 'X', place O in the index of ''
+            for (let i = 0; i < winningCombinations.length; i++) {
+                count = 0;
+                iToUse = -1;
+                for (let j = 0; j < winningCombinations[i].length; j++) {
+                    let index = winningCombinations[i][j];
+                    if (playerMove[index] === 'X') { count++ }//count X
+                    if (playerMove[index] === '') { iToUse = index; }//find index of ''
+                }
+                if (count === 2 && iToUse != -1) {
+                    placeO(iToUse)
+                    checkAgain = false;
+                    break;
+                }
+            }
+
+            //if there is no 'O', place O in the middle or if middle has 'X', place O in the first index of ''
+            if (checkAgain === true) {
+                if (playerMove[4] === '') {
+                    iToUse = 4;
+                } else {
+                    iToUse = playerMove.indexOf('');
+                }
                 placeO(iToUse);
-                displayWinnerFx('O');
-                return;
             }
-        }
-
-        //if there are 2 'X', place O in the index of ''
-        for (let i = 0; i < winningCombinations.length; i++) {
-            count = 0;
-            iToUse = -1;
-            for (let j = 0; j < winningCombinations[i].length; j++) {
-                let index = winningCombinations[i][j];
-                if (playerMove[index] === 'X') { count++ }//count X
-                if (playerMove[index] === '') { iToUse = index; }//find index of ''
-            }
-            if (count === 2 && iToUse != -1) {
-                placeO(iToUse)
-                checkAgain = false;
-                break;
-            }
-        }
-
-        //if there is no 'O', place O in the middle or if middle has 'X', place O in the first index of ''
-        if (checkAgain === true) {
-            if (playerMove[4] === '') {
-                iToUse = 4;
-            } else {
-                iToUse = playerMove.indexOf('');
-            }
-            placeO(iToUse);
         }
 
         if (playerMove.includes('') === false) {
@@ -138,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (playerMove.includes('') === false) { //check for a draw if winner not achieved.
                     displayWinnerFx();
                 } else {
-                    if (computer === 'O') {//whether the next player is computer
+                    if (computer === 'O') {//check for computer player
                         gameOn = false;
                         switchPlayer(currentPlayer);
                         setTimeout(computerTurn, 500);
@@ -149,25 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    const displayWinnerFx = (player) => {
-        gameOn = false;
-        displayWinner.style.visibility = 'visible';
-        if (player) {
-            displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
-            addScore(currentPlayer)
-        } else {
-            displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
-        }
-    };
-
-    const addScore = (player) => {
-        if (player === 'X') {
-            scoreDisplay1.innerHTML = ++Xscore
-        } else {
-            scoreDisplay2.innerHTML = ++Oscore
-        }
-    };
 
     const restartGame = function () {
         gameOn = true;
@@ -183,6 +198,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             gameOn = true;
         }, 500)
+    }
+
+    const resetGame = function () {
+        Oscore = 0;
+        scoreDisplay1.innerHTML = Oscore;
+        Xscore = 0;
+        scoreDisplay2.innerHTML = Xscore;
+        onePlayerBtn.style.color = '';
+        twoPlayerBtn.style.color = '';
+        player1.className = '';
+        player2.className = '';
+        player2.innerHTML = 'player 2';
+        restartGame();
+        gameOn = false;
+        computer = false;
     }
 
     onePlayerBtn.addEventListener('click', () => {
@@ -202,21 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
             twoPlayerBtn.style.color = 'gray';
         }
     })
-
-    const resetGame = function () {
-        Oscore = 0;
-        scoreDisplay1.innerHTML = Oscore;
-        Xscore = 0;
-        scoreDisplay2.innerHTML = Xscore;
-        onePlayerBtn.style.color = '';
-        twoPlayerBtn.style.color = '';
-        player1.className = '';
-        player2.className = '';
-        player2.innerHTML = 'player 2';
-        restartGame();
-        gameOn = false;
-        computer = false;
-    }
 
     startBtn.addEventListener('click', restartGame)
 
