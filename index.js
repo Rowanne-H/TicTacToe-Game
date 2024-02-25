@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let displayWinner = document.querySelector('#winner');
     let onePlayerBtn = document.querySelector('#one-player');
     let twoPlayerBtn = document.querySelector('#two-player');
+    let player1 = document.querySelector('#player1');
+    let player2 = document.querySelector('#player2');
+    let gameOn = false;
     let computer = false;
 
     let Xscore = 0;
     let Oscore = 0;
     let playerMove = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = "X";
-    let gameOn = true
     let winningCombinations = [
         [0, 1, 2],
         [3, 4, 5],
@@ -95,13 +97,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    onePlayerBtn.addEventListener('click', () => {
+        if (gameOn === false && computer === false) {
+            gameOn = true;
+            computer = 'O';
+            switchPlayer('O');
+            player2.innerHTML = 'Computer';
+            onePlayerBtn.style.color = 'gray';
+        }
+    })
+
+    twoPlayerBtn.addEventListener('click', () => {
+        if (gameOn === false && computer === false) {
+            gameOn = true;
+            switchPlayer('O');
+            twoPlayerBtn.style.color = 'gray';
+        }
+    })
+
     const resetGame = function () {
         Oscore = 0;
         scoreDisplay1.innerHTML = Oscore;
         Xscore = 0;
         scoreDisplay2.innerHTML = Xscore;
-        switchPlayer('O');
-        restartGame()
+        onePlayerBtn.style.color = '';
+        twoPlayerBtn.style.color = '';
+        player1.className = '';
+        player2.className = '';
+        player2.innerHTML = 'player 2';
+        restartGame();
+        gameOn = false;
+        computer = false;
     }
 
     startBtn.addEventListener('click', restartGame)
