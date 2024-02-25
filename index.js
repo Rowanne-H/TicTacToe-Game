@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let startBtn = document.querySelector('#start');
     let resetBtn = document.querySelector('#reset');
-    let grid = document.querySelectorAll('#grid');
     let grids = document.querySelectorAll('#grid>div');
     let scoreDisplay1 = document.querySelector('#player1-score');
     let scoreDisplay2 = document.querySelector('#player2-score');
