@@ -9,13 +9,7 @@ body {
     margin: auto;     
 }
 
-#displayResult {
-    background-color: lightblue; 
-	width: 450px;
-    height: 450px;
-    position: absolute;  
-    z-index: -1;
-}
+
 
 #grid {
     width: 450px;

@@ -39,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!playerMove[index]){
             playerMove[index] = currentPlayer;
             e.target.innerText = currentPlayer;
-            if(winningCheck() == true){
-
+            if(winningCheck() === true){
                 //alert(`${currentPlayer} has won`);
                 gameOn = false;
                 displayWinnerFx(currentPlayer);
