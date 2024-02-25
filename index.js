@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const switchPlayer = (player) => {
         if (currentPlayer === 'X') {
             player1.className = 'current-player';
-            player2.className = '';           
+            player2.className = '';
         } else {
             player1.className = '';
-            player2.className = 'current-player';  
+            player2.className = 'current-player';
         }
     }
 
@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!playerMove[index]) {
             playerMove[index] = currentPlayer;
             e.target.innerText = currentPlayer;
-            if (winningCheck() === true) { 
+            if (winningCheck() === true) {
                 displayWinnerFx(currentPlayer);
                 addScore(currentPlayer);
                 return;
             } else { //check for a draw if winner not achieved.
-                if (playerMove.includes('') === false) { 
+                if (playerMove.includes('') === false) {
                     displayWinnerFx();
                     return;
                 }
