@@ -34,3 +34,8 @@ body {
 #player2 {
     margin-right: 30px;
 }
+
+.current-player {
+    color: white;
+    background-color: black;
+}
