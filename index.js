@@ -112,6 +112,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        //if there is no 'O', place O in the middle or if middle has 'X', place O in the first index of ''
+        if (checkAgain === true) {
+            if (playerMove[4] === '') {
+                iToUse = 4;
+            } else {
+                iToUse = playerMove.indexOf('');
+            }
+            placeO(iToUse);
+        }
+
         gameOn = true;
         switchPlayer(currentPlayer);
     }
