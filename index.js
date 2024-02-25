@@ -33,13 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const switchPlayer = (player) => {
         if (currentPlayer === 'X') {
-            currentPlayer = 'O';
-            player1.className = '';
-            player2.className = 'current-player';
-        } else {
-            currentPlayer = 'X';
-            player2.className = '';
             player1.className = 'current-player';
+            player2.className = '';           
+        } else {
+            player1.className = '';
+            player2.className = 'current-player';  
         }
     }
 
@@ -51,18 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!playerMove[index]) {
             playerMove[index] = currentPlayer;
             e.target.innerText = currentPlayer;
-            if (winningCheck() === true) {
-                
+            if (winningCheck() === true) { 
                 displayWinnerFx(currentPlayer);
                 addScore(currentPlayer);
                 return;
             } else { //check for a draw if winner not achieved.
-                if (playerMove.includes('') === false) {
-                    
+                if (playerMove.includes('') === false) { 
                     displayWinnerFx();
                     return;
                 }
             }
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
             switchPlayer(currentPlayer)
         }
     };
@@ -100,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Xscore = 0;
         scoreDisplay2.innerHTML = Xscore;
         currentPlayer = "X";
-        switchPlayer(currentPlayer)
+        switchPlayer(currentPlayer);
         restartGame()
     }
 
