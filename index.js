@@ -93,20 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //if there are 2 'X', place O in the index of ''
-        if (checkAgain === true) {
-            for (let i = 0; i < winningCombinations.length; i++) {
-                count = 0;
-                iToUse = -1;
-                for (let j = 0; j < winningCombinations[i].length; j++) {
-                    let index = winningCombinations[i][j];
-                    if (playerMove[index] === 'X') { count++ }//count X
-                    if (playerMove[index] === '') { iToUse = index; }//find index of ''
-                }
-                if (count === 2 && iToUse != -1) {
-                    placeO(iToUse)
-                    checkAgain = false;
-                    break;
-                }
+        for (let i = 0; i < winningCombinations.length; i++) {
+            count = 0;
+            iToUse = -1;
+            for (let j = 0; j < winningCombinations[i].length; j++) {
+                let index = winningCombinations[i][j];
+                if (playerMove[index] === 'X') { count++ }//count X
+                if (playerMove[index] === '') { iToUse = index; }//find index of ''
+            }
+            if (count === 2 && iToUse != -1) {
+                placeO(iToUse)
+                checkAgain = false;
+                break;
             }
         }
 
@@ -122,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (playerMove.includes('') === false) {
             displayWinnerFx();
+            return;
         }
 
         gameOn = true;
