@@ -97,8 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //computer place O randomly so that player 1 have a chance to win
         if (playerMove.filter(e => e === '').length < 4) {
-            console.log(playerMove.filter(e => e === '').length)
-            const getRandomI = () =>{
+            const getRandomI = () => {
                 let i = Math.floor(Math.random() * 9);
                 if (!playerMove[i]) {
                     return i
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             iToUse = getRandomI();
             placeO(iToUse)
             if (winningCheck() === true) {
-                displayWinnerFx('O');
+                displayWinnerFx(currentPlayer);
                 return;
             }
         } else {
