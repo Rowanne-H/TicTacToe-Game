@@ -114,8 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         gameOn = true;
         switchPlayer(currentPlayer);
-        
-        
     }
 
     const gridClicked = function (e) {
@@ -167,6 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
         grids.forEach(grid => {
             grid.innerText = "";
         });
+        setTimeout(() => {
+            if (currentPlayer === 'O' && computer === 'O') {
+                placeO(4);
+                switchPlayer(currentPlayer)
+            }
+            gameOn = true;
+        }, 500)
     }
 
     onePlayerBtn.addEventListener('click', () => {
