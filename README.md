@@ -1,4 +1,4 @@
-# TicTacToe-Game
+## TicTacToe-Game
 ## Group project
 ### player 1: this label reprents player 1 (X) and color changes to white while background changes to black when it is this player's turn to play game.
 ### player 2: this label reprents player 2 (O, in 'player 1 VS player 2' mode) or computer (O, in 'player 1 VS computer' mode); The color changes to white while background changes to black
