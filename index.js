@@ -108,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             iToUse = getRandomI();
             placeO(iToUse)
+            if (winningCheck() === true) {
+                displayWinnerFx('O');
+                return;
+            }
         } else {
             //if there are 2 'O', place O in the index of ''
             for (let i = 0; i < winningCombinations.length; i++) {
