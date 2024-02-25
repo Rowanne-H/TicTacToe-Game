@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayWinnerFx = (player) => {
         let displayWinner = document.querySelector('#winner');
         gameOn = false;
-        displayWinner.style.visibility = 'visible'
+        displayWinner.style.visibility = 'visible';
         if(player) {
             displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
         } else {
