@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let displayWinner = document.querySelector('#winner');
     let onePlayerBtn = document.querySelector('#one-player');
     let twoPlayerBtn = document.querySelector('#two-player');
+    let computer = false;
 
     let Xscore = 0;
     let Oscore = 0;
@@ -34,12 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const switchPlayer = (player) => {
-        if (currentPlayer === 'X') {
+        if (player === 'X') {
+            currentPlayer = 'O';
+            player1.className = '';
+            player2.className = 'current-player'; 
+        } else {
+            currentPlayer = 'X';
             player1.className = 'current-player';
             player2.className = '';
-        } else {
-            player1.className = '';
-            player2.className = 'current-player';
         }
     }
 
@@ -61,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
             }
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
             switchPlayer(currentPlayer)
         }
     };
@@ -98,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreDisplay1.innerHTML = Oscore;
         Xscore = 0;
         scoreDisplay2.innerHTML = Xscore;
-        currentPlayer = "X";
-        switchPlayer(currentPlayer);
+        switchPlayer('O');
         restartGame()
     }
 
