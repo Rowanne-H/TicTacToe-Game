@@ -48,33 +48,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const computerTurn = () => {
+        console.log('computer')
+    }
+
     const gridClicked = function (e) {
-        if (gameOn === false) {
-            return
-        }
-        let index = e.target.id;
-        if (!playerMove[index]) {
-            playerMove[index] = currentPlayer;
-            e.target.innerText = currentPlayer;
-            if (winningCheck() === true) {
-                displayWinnerFx(currentPlayer);
-                addScore(currentPlayer);
-                return;
-            } else { //check for a draw if winner not achieved.
-                if (playerMove.includes('') === false) {
+        if (gameOn === true) {
+            let index = e.target.id;
+            if (!playerMove[index]) {
+                playerMove[index] = currentPlayer;
+                e.target.innerText = currentPlayer;
+                if (winningCheck() === true) {
+                    displayWinnerFx(currentPlayer);
+                } else if (playerMove.includes('') === false) { //check for a draw if winner not achieved.
                     displayWinnerFx();
-                    return;
+                } else {
+                    if (computer === 'O') {
+                        gameOn = false;
+                        switchPlayer(currentPlayer);
+                        setTimeout(computerTurn, 500);
+                    } else {
+                        switchPlayer(currentPlayer)
+                    }
                 }
             }
-            switchPlayer(currentPlayer)
         }
-    };
+    }
 
     const displayWinnerFx = (player) => {
         gameOn = false;
         displayWinner.style.visibility = 'visible';
         if (player) {
             displayWinner.innerHTML = `${player} wins!!! Press NEXT ROUND to Start again`
+            addScore(currentPlayer)
         } else {
             displayWinner.innerHTML = `Draw!!! Press NEXT ROUND to Start again`
         }
