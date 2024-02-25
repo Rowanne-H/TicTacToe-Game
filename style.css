@@ -3,10 +3,11 @@ body {
     text-align: center;
     font-family: "Comic Sans MS", Times, serif;
 }
+
 #container {
     width: 450px;
-    height: 450px;
-    margin: auto;     
+    height: 480px;
+    margin: auto;
 }
 
 #winner {
@@ -17,22 +18,19 @@ body {
     width: 450px;
     height: 450px;
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
     font-size: 100px;
 }
-    
+
 #grid div {
     background-color: white;
     width: 150px;
     height: 150px;
-    border: 5px solid black ;
+    border: 5px solid black;
     box-sizing: border-box;
 }
 
-#start-reset{
-    margin-top: 30px;   
-}
-
-#player1, #player2{
-    margin-right: 30px;  
+#player1,
+#player2 {
+    margin-right: 30px;
 }
