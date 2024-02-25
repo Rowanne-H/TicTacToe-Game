@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let startBtn = document.querySelector('#start');
     let resetBtn = document.querySelector('#reset');
-    let playAgainBtn = document.querySelector('#playAgain');
     let grid = document.querySelectorAll('#grid');
     let grids = document.querySelectorAll('#grid>div');
     let scoreDisplay1 = document.querySelector('#player1-score');
@@ -10,10 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let Xscore = 0;
     let Oscore = 0;
 
-    const playerX = "X";
-    const playerO = "O";
     let playerMove = ['','','','','','','','',''];
-    let currentPlayer = playerX;
+    let currentPlayer = "X";
     let currentTurn = 0;
     let gameOn = true
     let winningCombinations = [
@@ -57,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         displayDraw()
                     }
                 }
-        currentPlayer = currentPlayer === playerX ? playerO : playerX;
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
     };
     
@@ -99,17 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
         hideDisplay.style.visibility = 'hidden';
         playerMove = ['','','','','','','','',''];
         currentTurn = 0;
-        console.log(playerMove);
+        
         grids.forEach(grid => {
             grid.innerText = "";
         });
     }
+    
     
     const resetGame = function() {
         Oscore = 0;
         scoreDisplay1.innerHTML = Oscore;
         Xscore = 0;
         scoreDisplay2.innerHTML = Xscore;
+        currentPlayer = "X";
         restartGame()
     }
 
