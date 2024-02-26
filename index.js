@@ -9,8 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let twoPlayerBtn = document.querySelector('#two-player');
     let player1 = document.querySelector('#player1');
     let player2 = document.querySelector('#player2');
+    let playMode = document.getElementById('playMode');
+    let thegrid = document.getElementById('grid')
     let gameOn = false;
     let computer = false;
+    let sameGame = true;
 
     let Xscore = 0;
     let Oscore = 0;
@@ -188,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const restartGame = function () {
-        gameOn = true;
+        gameOn = sameGame;
         displayWinner.style.visibility = 'hidden';
         playerMove = ['', '', '', '', '', '', '', '', ''];
         grids.forEach(grid => {
@@ -199,40 +202,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 placeO(4);
                 switchPlayer(currentPlayer)
             }
-            gameOn = true;
-        }, 500)
+            gameOn = sameGame;
+        }, 500);
+        return
     }
 
     const resetGame = function () {
+        sameGame = false;
+        computer = false;
         Oscore = 0;
         scoreDisplay1.innerHTML = Oscore;
         Xscore = 0;
         scoreDisplay2.innerHTML = Xscore;
         onePlayerBtn.style.color = '';
         twoPlayerBtn.style.color = '';
-        player1.className = '';
-        player2.className = '';
-        player2.innerHTML = 'player 2';
-        restartGame();
-        gameOn = false;
-        computer = false;
+        player1.className = 'player';
+        player2.className = 'player';
+        player2.innerText = 'Player 2';
+        currentPlayer = 'X' 
+        onePlayerBtn.style.visibility = 'visible';
+        twoPlayerBtn.style.visibility = 'visible';
+        playMode.innerText = '';
+        startBtn.style.visibility = 'hidden';
+        resetBtn.style.visibility = 'hidden';
+        thegrid.style.visibility = 'hidden'
+        restartGame()
+    }
+
+    const startGame = function () {
+        onePlayerBtn.style.visibility = 'hidden';
+        twoPlayerBtn.style.visibility = 'hidden';
+        startBtn.style.visibility = 'visible';
+        resetBtn.style.visibility = 'visible';
+        thegrid.style.visibility = 'visible'
     }
 
     onePlayerBtn.addEventListener('click', () => {
         if (gameOn === false && computer === false) {
             gameOn = true;
             computer = 'O';
+            sameGame = true;
             switchPlayer('O');
-            player2.innerHTML = 'Computer';
+            player2.innerText = 'Computer';
             onePlayerBtn.style.color = 'gray';
+            playMode.innerText = 'Player Vs Computer';
+            startGame()
         }
     })
 
     twoPlayerBtn.addEventListener('click', () => {
         if (gameOn === false && computer === false) {
             gameOn = true;
+            sameGame = true;
             switchPlayer('O');
             twoPlayerBtn.style.color = 'gray';
+            playMode.innerText = 'Player 1 Vs Player 2';
+            startGame()
+
         }
     })
 

@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     font-size: 100px;
+    visibility: hidden;
 }
 
 #grid div {
@@ -33,6 +34,11 @@ body {
 #player1,
 #player2 {
     margin-right: 30px;
+}
+
+#reset,
+#start {
+    visibility: hidden;
 }
 
 .current-player {
